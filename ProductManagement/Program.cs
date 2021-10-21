@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 namespace ProductManagement
 {
     class Program
@@ -16,7 +16,11 @@ namespace ProductManagement
                 new Product(){ProductID = 4, UserID = 4, Rating = 4.5, Review = "Its Good", isLike = true},
                 new Product(){ProductID = 5, UserID = 5, Rating = 5.0, Review = "Amazing", isLike = true},
             };
-            foreach(Product p in products)
+            var topThree = (from pro in products
+                                orderby pro.Rating descending
+                                select pro).Take(3);
+
+            foreach (var p in topThree)
             {
                 Console.WriteLine($"{p.ProductID} {p.UserID} {p.Rating} {p.Review} {p.isLike}");
             }
