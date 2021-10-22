@@ -84,6 +84,7 @@ namespace ProductManagement
                 row["Likes"] = likes;
                 dataTable.Rows.Add(row);
             }
+            //Showing All records
             var table = (
                          from DataRow row in dataTable.Rows
                          where row.Field<bool>("Likes") == true
@@ -93,6 +94,19 @@ namespace ProductManagement
             {
                 Console.WriteLine($" DataTable: {r["ProductId"]} {r["UserId"]} {r["Rating"]} {r["Reviews"]} {r["Likes"]}");
             }
+            ///Showing Rating Average
+            var ratingTable = (
+                         from DataRow row in dataTable.Rows
+                         select row
+                         );
+            foreach (DataRow r in ratingTable)
+            {
+                var avg = (
+                         dataTable.AsEnumerable().Average(a => r.Field<double>("Rating"))
+                      );
+                Console.WriteLine($"{avg}");
+            }
+            
         }
     }
 }
