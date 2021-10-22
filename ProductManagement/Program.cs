@@ -117,6 +117,17 @@ namespace ProductManagement
             {
                 Console.WriteLine($" DataTable: {r["ProductId"]} {r["UserId"]} {r["Rating"]} {r["Reviews"]} {r["Likes"]}");
             }
+            //UC12 List of Records of User 10 
+            var user = (
+                         from DataRow row in dataTable.Rows
+                         where row.Field<int>("UserId") == 10
+                         select row
+                         );
+            Console.WriteLine($"-----User with UserId 10 All Data-----");
+            foreach (DataRow r in user)
+            {
+                Console.WriteLine($" DataTable: {r["ProductId"]} {r["UserId"]} {r["Rating"]} {r["Reviews"]} {r["Likes"]}");
+            }
         }
     }
 }
