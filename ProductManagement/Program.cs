@@ -12,7 +12,7 @@ namespace ProductManagement
            List<Product> products = new List<Product>();
             int count = 0;
             bool likes = false;
-            string[] productReviews = { "Amazing", "Good",  "Nice", "Its Good", "Fine", "Not Bad", ";)", "Cool", null, "Just Ok", "Great", null, "Good", "Nice", "Its Good", "Fine", "Not Bad", "Amazing Product", "Bad Product", "Good Quality", "Cool", "Just Ok", "Great", "Amazing Quality", "Good Product" };
+            string[] productReviews = { "Amazing", "Good",  "Nice", "Its Good", "Fine", "Not Bad", ";)", "Cool", null, "Just Ok", "Great", null, "Good", "Nice", "Its Good", "Very Nice", "Not Bad", "Amazing Product", "Nice Product", "Good Quality", "Cool", "Just Ok", "Nice Quality", "Amazing Quality", "Good Product" };
             double[] rate = { 4.5, 4.5, 3.9, 4.8, 4.9, 5.0, 1.4, 3.2, 4.8, 3.9, 3.5, 1.8, 4.9, 5.0, 2.9, 2.2, 1.0, 3.0, 4.8, 4.1, 2.3, 1.9, 4.9, 2.0, 5.0 };
             for (int i = 0; i < 25; i++)
             {
@@ -106,7 +106,17 @@ namespace ProductManagement
                       );
                 Console.WriteLine($"{avg}");
             }
-            
+            //Like Clause fetch Matched Records
+            var pattern = (
+                         from DataRow row in dataTable.AsEnumerable()
+                         where row.Field<string>("Reviews") == "Cool"
+                         && row.Field<string>("Reviews").Contains("Cool")
+                         select row
+                         );
+            foreach (DataRow r in pattern)
+            {
+                Console.WriteLine($" DataTable: {r["ProductId"]} {r["UserId"]} {r["Rating"]} {r["Reviews"]} {r["Likes"]}");
+            }
         }
     }
 }
